@@ -1,0 +1,36 @@
+{% extends 'cuestionario/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<h2 style="text-align:center;">Agregar cuestionario</h2>
+<form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;">
+    {%csrf_token%}
+    <div class="form-group">
+      <label for="nombre_cuestionario">Nombre del cuestionario</label>
+      {% render_field cuestionarioForm.nombre_cuestionario class="form-control rounded-0" placeholder="Ejemplo: Batallas del Perú" %}
+      <br>
+
+      <label for="descripcion_cuestionario">Descripción</label>
+      {% render_field cuestionarioForm.descripcion_cuestionario class="form-control rounded-0" placeholder="Ejemplo: lore" %}
+      <br>
+
+      <label for="numero_preguntas">Total de Preguntas</label>
+      {% render_field cuestionarioForm.numero_preguntas class="form-control rounded-0" placeholder="Ejemplo: 20" %}
+      <br>
+
+      <label for="puntaje_maximo">Puntaje total</label>
+      {% render_field cuestionarioForm.puntaje_maximo class="form-control rounded-0" placeholder="Ejemplo: 20" %}
+      <br>
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary rounded-0">Crear</button>
+  </form>
+<br><br><br>
+{% endblock content %}

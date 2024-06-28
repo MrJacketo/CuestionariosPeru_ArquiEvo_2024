@@ -1,0 +1,62 @@
+{% extends 'cuestionario/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+    .containertabla{
+      color: white;
+      padding: 10px 0;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+<br><br>
+<div class="container">
+  <div class="panel panel-primary rounded-0">
+    <div class="containertabla panel-heading rounded-0">
+      <h6 class="panel-title">Usuarios</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+
+          <th>Nombre</th>
+          <th>Foto</th>
+          <th>Contacto</th>
+          <th>Dirección</th>
+         
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      {% for t in usuarios %}
+      <tr>
+
+        <td> {{t.get_name}}</td>
+        <td> <img src="{% static t.foto_perfil.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{t.celular}}</td>
+        <td>{{t.direccion}}</td>
+        
+        <td class="text-center">
+          <a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'update-usuario' t.id  %}"><small class="fas fa-edit"></small></a>
+          <a class="btn btn-danger btn-xs" style="border-radius: 0%;" href="{% url 'delete-usuario' t.id  %}" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
+            <small class="fas fa-trash"></small>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

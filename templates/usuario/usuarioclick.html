@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <style media="screen">
+    .jumbotron {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .jumbotron h1 {
+      text-align: center;
+    }
+    .btn-primary{
+      background-color: red!important;
+      border-color: red!important;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  {% include "cuestionario/navbar.html" %}
+  <br><br>
+  <div class="jumbotron" style="margin-bottom:0px;">
+    <h1 class="display-4">Hola Usuario,</h1>
+    <p class="lead">Bienvenido a Nuestros Cuestionarios sobre la Historia del Perú</p>
+    <hr class="my-4">
+    <p>Selecciona una opción</p>
+    <p class="lead">
+      <a class="btn btn-secondary rounded-0" href="usuariosignup" role="button">Crear una cuenta</a>
+      <a class="btn btn-primary rounded-0" href="usuariologin" role="button">Hacer Login</a>
+    </p>
+    <br><br><br><br><br><br>
+  </div>
+ 
+  {% include "cuestionario/footer.html" %}
+</body>
+
+</html>

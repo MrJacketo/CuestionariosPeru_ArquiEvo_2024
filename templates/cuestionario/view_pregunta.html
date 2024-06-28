@@ -1,0 +1,52 @@
+{% extends 'cuestionario/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+  </style>
+</head>
+<br><br>
+<div class="container">
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">Preguntas</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+
+          <th>Preguntas</th>
+         
+          <th>Puntaje</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      {% for c in preguntas %}
+      <tr>
+
+        <td> {{c.pregunta}}</td>
+        
+        <td>{{c.puntaje}}</td>
+        <td><a class="btn btn-danger btn-xs" style="border-radius: 0%;" href="{% url 'delete-pregunta' c.id  %}" onclick="return confirm('¿Estás seguro de que quieres eliminar esta pregunta?')"><span class="glyphicon glyphicon-trash"></span></a></td>
+        
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'cuestionario/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+</head>
+<h2 style="text-align:center;">Agregar Pregunta</h2>
+<form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;">
+    {%csrf_token%}
+    <div class="form-group">
+        <label for="pregunta">Cuestionario</label>
+      {% render_field preguntaForm.cuestionarioID|attr:'required:true' class="form-control form-control-sm rounded-0" placeholder="Ejemplo: 5" %}
+        <br>
+
+      <label for="pregunta">Pregunta</label>
+      {% render_field preguntaForm.pregunta|attr:'required:true' class="form-control form-control-sm rounded-0" placeholder="Ejemplo: ¿En que año fue la toma de Arica?" %}
+        <br>
+      <label for="puntajes">Puntaje</label>
+      {% render_field preguntaForm.puntaje|attr:'required:true' class="form-control form-control-sm rounded-0" placeholder="Ejemplo: 5" %}
+        <br>
+      <label for="opcion1">Opción 1</label>
+      {% render_field preguntaForm.opcion1|attr:'required:true' class="form-control form-control-sm rounded-0" placeholder="Ejemplo: 1821" %}
+        <br>
+      <label for="opcion2">Opción 2</label>
+      {% render_field preguntaForm.opcion2|attr:'required:true' class="form-control form-control-sm rounded-0" placeholder="Ejemplo: 1830" %}
+        <br>
+      <label for="opcion3">Opción 3</label>
+      {% render_field preguntaForm.opcion3|attr:'required:true' class="form-control form-control-sm rounded-0" placeholder="Ejemplo: 1823" %}
+        <br>
+      <label for="opcion4">Opción 4</label>
+      {% render_field preguntaForm.opcion4|attr:'required:true' class="form-control form-control-sm rounded-0" placeholder="Ejemplo: 1820" %}
+        <br>
+      <label for="respuesta">Respuesta correcta</label>
+      {% render_field preguntaForm.respuesta|attr:'required:true' class="form-control form-control-sm rounded-0" %}
+    </div>
+    
+
+    <button type="submit" class="btn btn-success" style="border-radius:0px;">Agregar Pregunta</button>
+  </form>
+<br><br><br>
+{% endblock content %}

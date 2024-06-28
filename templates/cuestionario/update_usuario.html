@@ -1,0 +1,47 @@
+{% extends 'cuestionario/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<head>
+  <style media="screen">
+    input[type=text], select,input[type=number] ,input[type=password], textarea{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  </style>
+
+
+</head>
+
+<br><br>
+<h2 style="text-align:center;">Actualizar usuario</h2>
+<div>
+  <form method="post" autocomplete="off" enctype="multipart/form-data" style="margin-left:200px;margin-right:200px;">
+      {% csrf_token %}
+        <label for="first_name">Primer Nombre</label>
+        {% render_field userForm.first_name class="form-control form-control-sm rounded-0" placeholder="Nombre" %}
+        <label for="last_name">Apellidos</label>
+        {% render_field userForm.last_name class="form-control form-control-sm rounded-0" placeholder="Apellidos" %}
+          <label for="celular">Contacto</label>
+          {% render_field usuarioForm.celular class="form-control form-control-sm rounded-0" placeholder="Celular" %}
+            <label for="direccion">Dirección</label>
+          {% render_field usuarioForm.direccion class="form-control form-control-sm rounded-0" placeholder="Dirección" %}
+          
+        <label for="username">Usuario</label>
+        {% render_field userForm.username class="form-control form-control-sm rounded-0" placeholder="Usuario" %}
+          <label for="password">Contraseña</label>
+        {% render_field userForm.password class="form-control form-control-sm rounded-0" placeholder="Contraseña" %} <br><br>
+        <label for="foto_perfil">Foto de Perfil</label>
+          {% render_field usuarioForm.foto_perfil class="form-control form-control-sm rounded-0" placeholder="Foto de Perfil" %}
+<br><br>
+    <input type="submit" class="btn btn-lg rounded-0 btn-primary" value="Actualizar" style="border-radius:0px;">
+  </form>
+</div>
+
+
+
+{% endblock content %}

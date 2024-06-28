@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<style>
+  .jumbotron{
+    margin-bottom: 0px!important;
+  }
+
+  h2{
+    color: red;
+  }
+
+  .lead {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .btn-color{
+    color: white!important;
+    background-color: red!important;
+    border-color: red!important;
+    
+  }
+</style>
+<body>
+  {% include "cuestionario/navbar.html" %}
+<br>
+<section id="section-jumbotron" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
+  <div class="container text-center">
+    <h2 class="display-3">Raíces y Futuro</h2>
+    <p class="display-4 d-none d-sm-block">La Historia del Perú</p>
+    <p class="lead">El proyecto consiste en una aplicación web en la que los usuarios podrán registrarse, iniciar sesión y participar en quizzes sobre la historia del Perú.</p>
+
+  
+    <p><strong> Comienza registrandote aquí:</strong></p>
+    <a href="/usuario/usuariosignup" class="btn btn-lg btn-color" style="padding-right: 35px; border-radius: 0%;"><i class="fa fa-user" aria-hidden="true"></i>Registrarse</a>
+    
+    <br><br><br>
+  </div>  
+</section>
+  {% include "cuestionario/footer.html" %}
+
+
+</body>
+
+</html>
