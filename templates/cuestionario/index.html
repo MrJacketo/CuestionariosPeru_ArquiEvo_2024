@@ -2,46 +2,148 @@
 {% load static %}
 <html lang="en" dir="ltr">
 
-<style>
-  .jumbotron{
-    margin-bottom: 0px!important;
-  }
+<head>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: none; /* Sin fondo para html y body */
+        }
 
-  h2{
-    color: red;
-  }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: black; /* Texto negro para todo el body */
+        }
 
-  .lead {
-    padding-left: 100px;
-    padding-right: 100px;
-  }
+        .background-container {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            background: url("{% static 'image/Captura.png' %}") no-repeat center center;
+            background-size: cover;
+            margin-top: -20px; /* Para ocultar el margen inferior del jumbotron */
+            padding-top: 20px; /* Para compensar el margen oculto */
+        }
 
-  .btn-color{
-    color: white!important;
-    background-color: red!important;
-    border-color: red!important;
-    
-  }
-</style>
+        .jumbotron {
+            margin-bottom: 0px !important;
+            background: white; /* Fondo blanco */
+            color: black; /* Texto negro */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 40vh; /* Reducir la altura mínima */
+            padding: 20px;
+            border-radius: 10px; /* Opcional: para bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+            background-image: linear-gradient(to right, #b80000 25%, white 25%, white 75%, #b80000 75%);
+        }
+
+        .jumbotron h2 {
+            color: red; /* Color rojo */
+            font-family: 'Times New Roman', Times, serif; /* Fuente clásica */
+        }
+
+        .jumbotron .display-4 {
+            color: black; /* Color negro */
+            font-family: 'Times New Roman', Times, serif; /* Fuente clásica */
+        }
+
+        h2 {
+            color: red;
+        }
+
+        .display-4, .lead, p {
+            color: black;
+        }
+
+        .lead {
+            font-weight: bold; /* Aplicar negrita al texto */
+            margin-bottom: 0; /* Eliminar margen inferior */
+        }
+
+        .lead + .lead {
+            margin-top: 0; /* Eliminar margen superior entre los dos párrafos */
+        }
+
+        .btn-color {
+            color: white !important;
+            background-color: red !important;
+            border-color: red !important;
+        }
+
+        .content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .inspirational-text-container {
+            background-color: white; /* Fondo blanco */
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #b80000; /* Color rojo oscuro */
+            font-weight: bold;
+            margin-top: 20px; /* Espacio entre la imagen de fondo y el texto inspirador */
+            margin-bottom: -10px; /* Reducir margen inferior */
+        }
+
+        .inspirational-text-container + .inspirational-text-container {
+            margin-top: -10px; /* Reducir margen superior entre los dos párrafos */
+        }
+
+        footer {
+            background-color: rgba(108, 117, 125, 0.8); /* Fondo semi-transparente para el footer */
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+
 <body>
-  {% include "cuestionario/navbar.html" %}
-<br>
-<section id="section-jumbotron" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
-  <div class="container text-center">
-    <h2 class="display-3">Raíces y Futuro</h2>
-    <p class="display-4 d-none d-sm-block">La Historia del Perú</p>
-    <p class="lead">El proyecto consiste en una aplicación web en la que los usuarios podrán registrarse, iniciar sesión y participar en quizzes sobre la historia del Perú.</p>
-
-  
-    <p><strong> Comienza registrandote aquí:</strong></p>
-    <a href="/usuario/usuariosignup" class="btn btn-lg btn-color" style="padding-right: 35px; border-radius: 0%;"><i class="fa fa-user" aria-hidden="true"></i>Registrarse</a>
+    {% include "cuestionario/navbar.html" %}
+    <div class="content">
+        <section id="section-jumbotron" class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h2 class="display-3">Raíces y Futuro</h2>
+                <p class="display-4 d-none d-sm-block">La Historia del Perú</p>
+                <p class="lead"><strong>El proyecto consiste en una aplicación web en la que los usuarios podrán registrarse,</strong></p>
+                <p class="lead"><strong>iniciar sesión y participar en quizzes sobre la historia del Perú.</strong></p>
+                <p><strong> Comienza registrandote aquí:</strong></p>
+                <a href="/usuario/usuariosignup" class="btn btn-lg btn-color" style="padding-right: 35px; border-radius: 0%;"><i class="fa fa-user" aria-hidden="true"></i>Registrarse</a>
+            </div>
+            <div class="inspirational-text-container">
+                "Descubre el pasado, juega en el presente, y construye el futuro."
+            </div>
+            <div class="inspirational-text-container">
+                "¡Únete a nosotros y aprende de una manera divertida!"
+            </div>
+        </section>
+    </div>
     
-    <br><br><br>
-  </div>  
-</section>
-  {% include "cuestionario/footer.html" %}
+    <div class="background-container"></div>
+    <footer>
+        Raíces y Futuro: La Historia del Perú - 2024
+    </footer>
 
-
+    <!-- Agregar un bloque de JavaScript en línea -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Tu código JavaScript aquí
+            console.log("Página cargada completamente");
+        });
+    </script>
 </body>
-
 </html>
