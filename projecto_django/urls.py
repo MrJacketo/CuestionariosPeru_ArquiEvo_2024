@@ -7,10 +7,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('usuario/',include('usuario.urls')),
     
+
+
     path('',views.home_view,name=''),
     path('logout', LogoutView.as_view(template_name='componentes/logout.html'),name='logout'),
     path('contactus', views.contactus_view),
     path('afterlogin', views.afterlogin_view,name='afterlogin'),
+
+
 
     path('adminclick', views.adminclick_view),
     path('adminlogin', LoginView.as_view(template_name='cuestionario/adminlogin.html'),name='adminlogin'),
@@ -35,5 +39,7 @@ urlpatterns = [
     path('view-pregunta/<int:pk>', views.view_pregunta_view,name='view-pregunta'),
     path('delete-pregunta/<int:pk>', views.delete_pregunta_view,name='delete-pregunta'),
 
+    path('cuestionarios-ranking/', views.cuestionarios_ranking_view, name='cuestionarios-ranking'),
+    path('ranking/<int:cuestionario_id>/', views.ranking_view, name='ranking'),
 
 ]

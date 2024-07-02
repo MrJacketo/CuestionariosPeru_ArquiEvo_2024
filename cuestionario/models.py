@@ -26,3 +26,6 @@ class Resultados(models.Model):
     nota = models.PositiveIntegerField()
     fecha = models.DateTimeField(auto_now=True)
 
+class Ranking(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    puntaje_total = models.PositiveIntegerField(default=0)

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from . import forms, models
-from django.db.models import Sum
+from django.db.models import Max
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -11,7 +11,6 @@ from django.core.mail import send_mail
 from usuario import models as SMODEL
 from usuario import forms as SFORM
 from django.contrib.auth.models import User
-
 
 def home_view(request):
     if request.user.is_authenticated:
@@ -181,6 +180,24 @@ def admin_check_puntajes_view(request, pk):
     resultados = models.Resultados.objects.all().filter(cues=cuestionario).filter(usuario=usuario)
     return render(request, 'cuestionario/admin_check_puntajes.html', {'resultados': resultados})
 
+@login_required(login_url='adminlogin')
+def ranking_view(request, cuestionario_id):
+    cuestionario = models.Cuestionario.objects.get(id=cuestionario_id)
+    rankings = SMODEL.Usuario.objects.filter(
+        resultados__cues=cuestionario
+    ).annotate(
+        max_puntaje=Max('resultados__nota')
+    ).order_by('-max_puntaje')
+    return render(request, 'cuestionario/ranking.html', {'rankings': rankings, 'cuestionario': cuestionario})
+
+@login_required(login_url='adminlogin')
+def cuestionarios_ranking_view(request):
+    cuestionarios = models.Cuestionario.objects.all()
+    return render(request, 'cuestionario/cuestionarios_ranking.html', {'cuestionarios': cuestionarios})
+
+
+def aboutus_view(request):
+    return render(request, 'cuestionario/aboutus.html')
 
 
 def contactus_view(request):

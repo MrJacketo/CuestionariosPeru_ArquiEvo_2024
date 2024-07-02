@@ -1,0 +1,74 @@
+{% extends 'usuario/usuariobase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% load static %}
+
+<head>
+  <style type="text/css">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .order-card {
+      color: rgb(255, 255, 255);
+    }
+
+    .bg-c-red {
+      background: #D32F2F;
+    }
+
+
+    .card {
+      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      margin-bottom: 30px;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .card .card-block {
+      padding: 25px;
+    }
+
+    .order-card i {
+      font-size: 26px;
+    }
+
+    .f-left {
+      float: left;
+    }
+
+    .f-right {
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Rankings</h1>
+    <div class="row">
+      {% for cuestionario in cuestionarios %}
+      <div class="col-md-4 col-xl-3">
+        <a href="{% url 'usuario-ranking-detalle' cuestionario.id %}" style="text-decoration: none;color:white;">
+          <div class="card bg-c-red order-card">
+            <div class="card-block">
+              <h6 class="m-b-20">{{ cuestionario.nombre_cuestionario }}</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+
+{% endblock content %}

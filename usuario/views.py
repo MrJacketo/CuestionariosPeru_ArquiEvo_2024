@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,reverse, get_object_or_404
 from . import forms,models
-from django.db.models import Sum
+from django.db.models import Max
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -124,4 +124,18 @@ def usuario_puntajes_view(request):
     cuestionarios=QMODEL.Cuestionario.objects.all()
     return render(request,'usuario/usuario_puntajes.html',{'cuestionarios':cuestionarios})
     
+@login_required(login_url='login')
+def usuario_ranking_view(request):
+    cuestionarios = QMODEL.Cuestionario.objects.all()
+    return render(request, 'usuario/ranking.html', {'cuestionarios': cuestionarios})
+
+@login_required(login_url='login')
+def usuario_ranking_detalle_view(request, cuestionario_id):
+    cuestionario = QMODEL.Cuestionario.objects.get(id=cuestionario_id)
+    rankings = models.Usuario.objects.filter(
+        resultados__cues=cuestionario
+    ).annotate(
+        max_puntaje=Max('resultados__nota')
+    ).order_by('-max_puntaje')
+    return render(request, 'usuario/ranking_detalle.html', {'rankings': rankings, 'cuestionario': cuestionario})
   

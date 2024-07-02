@@ -15,4 +15,7 @@ path('calculate-puntajes', views.calculate_puntajes_view,name='calculate-puntaje
 path('view-resultado', views.view_resultado_view,name='view-resultado'),
 path('check-puntajes/<int:pk>', views.check_puntajes_view,name='check-puntajes'),
 path('usuario-puntajes', views.usuario_puntajes_view,name='usuario_puntajes'),
+
+path('ranking/', views.usuario_ranking_view, name='usuario-ranking'),
+path('ranking/<int:cuestionario_id>/', views.usuario_ranking_detalle_view, name='usuario-ranking-detalle'),
 ]
