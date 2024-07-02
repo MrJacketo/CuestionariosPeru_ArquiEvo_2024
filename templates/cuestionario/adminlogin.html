@@ -5,16 +5,30 @@
     <meta charset="utf-8">
     <title></title>
     <style media="screen">
-      body {
+body{
     margin: 0;
+    height: 100%;
     padding: 0;
     font-family: sans-serif;
-    background: #adc5df;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #d7d2cc, #adc5df);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #d7d2cc, #adc5df); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 }
-
+.background-image {
+            background-image: url('static/image/fondoAdminLogin.jpg'); /* Reemplaza con la ruta de tu imagen */
+            background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            background-position: center; 
+            height: 100%;
+            width: 100%;
+            position: fixed; /* Fija la imagen en la pantalla */
+            top: 0;
+            left: 0;
+}
+.content {
+            position: relative;
+            z-index: 1; /* Asegura que el contenido esté por encima de la imagen */
+            color: white; /* Ajusta el color del texto según sea necesario */
+            text-align: center;
+            padding: 20px;
+}
 .box {
     width: 500px;
     padding: 40px;
@@ -25,6 +39,7 @@ background: linear-gradient(to bottom, #d7d2cc, #adc5df); /* W3C, IE 10+/ Edge, 
     text-align: center;
     transition: 0.25s;
     margin-top: 100px
+ 
 }
 
 .box input[type="text"],
@@ -40,6 +55,7 @@ background: linear-gradient(to bottom, #d7d2cc, #adc5df); /* W3C, IE 10+/ Edge, 
     outline: none;
     color: #000;
     transition: 0.25s
+    
 }
 
 .box h1 {
@@ -51,12 +67,20 @@ background: linear-gradient(to bottom, #d7d2cc, #adc5df); /* W3C, IE 10+/ Edge, 
 .box input[type="password"]:focus {
     width: 300px;
     border-color: #c7d7e9;
+    border-radius: 15px;
 }
+footer {
+            background-color: #212529;
+            color: #fff;
+            padding: 20px 0;
+        }
 
     </style>
   </head>
   <body>
-    {% include "cuestionario/navbar.html" %}
+    <div class="background-image"></div>
+    <div class="content">
+    {% include "componentes/navbar.html" %}
     <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -72,12 +96,13 @@ background: linear-gradient(to bottom, #d7d2cc, #adc5df); /* W3C, IE 10+/ Edge, 
 
                 </form>
             </div>
+            
         </div>
     </div>
 </div>
 <br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br>
-{% include "cuestionario/footer.html" %}
+<br><br><br><br><br><br><br>
+{% include "componentes/footer.html" %}
   </body>
 </html>

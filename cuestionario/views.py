@@ -182,9 +182,6 @@ def admin_check_puntajes_view(request, pk):
     return render(request, 'cuestionario/admin_check_puntajes.html', {'resultados': resultados})
 
 
-def aboutus_view(request):
-    return render(request, 'cuestionario/aboutus.html')
-
 
 def contactus_view(request):
     sub = forms.ContactusForm()
