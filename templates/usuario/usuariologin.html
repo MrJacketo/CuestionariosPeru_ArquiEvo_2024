@@ -4,29 +4,54 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style media="screen">
         body {
             margin: 0;
+            height: 100%;
             padding: 0;
             font-family: sans-serif;
             background: #adc5df;  /* fallback for old browsers */
             background: -webkit-linear-gradient(to bottom, #d7d2cc, #adc5df);  /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to bottom, #d7d2cc, #adc5df); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        
         }
-        
+
+        .carousel-item {
+            height: 100vh;
+        }
+
+        .carousel-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-height: 100vh;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
         .box {
             width: 500px;
             padding: 40px;
             position: absolute;
             top: 50%;
             left: 50%;
+            transform: translate(-50%, -50%);
             background: #fff;
             text-align: center;
             transition: 0.25s;
-            margin-top: 100px
+            z-index: 2;
         }
-        
+
         .box input[type="text"],
         .box input[type="password"] {
             border: 0;
@@ -39,52 +64,64 @@
             width: 250px;
             outline: none;
             color: #000;
-            transition: 0.25s
+            transition: 0.25s;
         }
-        
+
         .box h1 {
             color: #424242;
-            font-weight: 500
+            font-weight: 500;
         }
-        
+
         .box input[type="text"]:focus,
         .box input[type="password"]:focus {
             width: 300px;
             border-color: #c7d7e9;
         }
 
-        .btn-primary{
+        .btn-primary {
             background-color: #D32F2F!important;
             border-color: #D32F2F!important;
         }
-        
-
-
     </style>
   </head>
   <body>
     {% include "componentes/navbar.html" %}
-    <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <form class="box" method="post">
-                    {% csrf_token %}
-                    <h1>Login de Usuario</h1>
 
-                     {% render_field form.username class="form-control rounded-0" autocomplete="off" placeholder="Usuario" %}
-                     {% render_field form.password class="form-control rounded-0" autocomplete="off" placeholder="Contraseña" %}
-
-                     <input type="submit" class="btn btn-primary btn-lg rounded-0" name="" value="Login">
-
-                </form>
-            </div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://viajes.nationalgeographic.com.es/medio/2018/03/01/machu-picchu_5ff969ae_1280x720.jpg" class="d-block w-100" alt="...">
         </div>
+        <div class="carousel-item">
+          <img src="https://e.rpp-noticias.io/xlarge/2018/02/12/235223_564170.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://i0.wp.com/perudesconocido.pe/wp-content/uploads/2017/01/portico-chavin-de-huantar.jpg?fit=880%2C660&ssl=1" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="https://elperuano.pe/fotografia/thumbnail/2018/07/28/000049341M.jpg" class="d-block w-100" alt="...">
+        </div>
+      </div>
     </div>
-</div>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br>
-{% include "componentes/footer.html" %}
+
+    <div class="overlay"></div>
+
+    <div class="box">
+        <form method="post">
+          {% csrf_token %}
+          <h1>Login de Usuario</h1>
+
+          {% render_field form.username class="form-control rounded-0" autocomplete="off" placeholder="Usuario" %}
+          {% render_field form.password class="form-control rounded-0" autocomplete="off" placeholder="Contraseña" %}
+
+          <input type="submit" class="btn btn-primary btn-lg rounded-0" name="" value="Login">
+        </form>
+    </div>
+
+    {% include "componentes/footer.html" %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

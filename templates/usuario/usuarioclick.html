@@ -5,42 +5,145 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Rotating Images with Footer</title>
 
-  <style media="screen">
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="{% static 'path/to/bootstrap.min.css' %}">
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .accordion-container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .accordion-container .image {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 1s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+    }
+
+    .accordion-container .image.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .image-1 {
+      background-image: url('https://viajes.nationalgeographic.com.es/medio/2018/03/01/machu-picchu_5ff969ae_1280x720.jpg');
+    }
+
+    .image-2 {
+      background-image: url('https://e.rpp-noticias.io/xlarge/2018/02/12/235223_564170.jpg');
+    }
+
+    .image-3 {
+      background-image: url('https://i0.wp.com/perudesconocido.pe/wp-content/uploads/2017/01/portico-chavin-de-huantar.jpg?fit=880%2C660&ssl=1');
+    }
+
+    .image-4 {
+      background-image: url('https://elperuano.pe/fotografia/thumbnail/2018/07/28/000049341M.jpg');
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center; /* Añadido para centrar el contenido */
+      background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    }
+
     .jumbotron {
-      margin-top: 0px;
-      margin-bottom: 0px;
+      padding: 2rem;
+      margin: 0;
     }
 
-    .jumbotron h1 {
+    .btn-primary {
+      background-color: red !important;
+      border-color: red !important;
+    }
+
+    /* Añadido para el footer */
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #333;
+      color: white;
       text-align: center;
+      padding: 10px 0;
     }
-    .btn-primary{
-      background-color: red!important;
-      border-color: red!important;
-    }
-
   </style>
-
 </head>
 
 <body>
 
   {% include "componentes/navbar.html" %}
-  <br><br>
-  <div class="jumbotron" style="margin-bottom:0px;">
-    <h1 class="display-4">Hola Usuario,</h1>
-    <p class="lead">Bienvenido a Nuestros Cuestionarios sobre la Historia del Perú</p>
-    <hr class="my-4">
-    <p>Selecciona una opción</p>
-    <p class="lead">
-      <a class="btn btn-secondary rounded-0" href="usuariosignup" role="button">Crear una cuenta</a>
-      <a class="btn btn-primary rounded-0" href="usuariologin" role="button">Hacer Login</a>
-    </p>
-    <br><br><br><br><br><br>
+
+  <div class="accordion-container">
+    <div class="image image-1 active"></div>
+    <div class="image image-2"></div>
+    <div class="image image-3"></div>
+    <div class="image image-4"></div>
   </div>
- 
-  {% include "componentes/footer.html" %}
+
+  <div class="content">
+    <div class="jumbotron">
+      <h1 class="display-4">Hola Usuario,</h1>
+      <p class="lead">Bienvenido a Nuestros Cuestionarios sobre la Historia del Perú</p>
+      <hr class="my-4">
+      <p>Selecciona una opción</p>
+      <p class="lead">
+        <a class="btn btn-secondary rounded-0" href="usuariosignup" role="button">Crear una cuenta</a>
+        <a class="btn btn-primary rounded-0" href="usuariologin" role="button">Hacer Login</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    {% include "componentes/footer.html" %}
+  </div>
+
+  <!-- Include Bootstrap JS and dependencies -->
+  <script src="{% static 'path/to/jquery.min.js' %}"></script>
+  <script src="{% static 'path/to/popper.min.js' %}"></script>
+  <script src="{% static 'path/to/bootstrap.min.js' %}"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let index = 0;
+      const images = document.querySelectorAll('.accordion-container .image');
+      const totalImages = images.length;
+
+      setInterval(() => {
+        images[index].classList.remove('active');
+        index = (index + 1) % totalImages;
+        images[index].classList.add('active');
+      }, 4000); // Cambia cada 4 segundos
+    });
+  </script>
 </body>
 
 </html>
