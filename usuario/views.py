@@ -1,19 +1,16 @@
-from django.shortcuts import render,redirect,reverse, get_object_or_404
+from django.shortcuts import render
 from . import forms,models
 from django.db.models import Max
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
-from django.conf import settings
-from datetime import date, timedelta
 from cuestionario import models as QMODEL
 
-
-#for showing signup/login button for usuario
 def usuarioclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request,'usuario/usuarioclick.html')
+
 
 def usuario_signup_view(request):
     userForm=forms.UsuarioUserForm()
@@ -34,8 +31,10 @@ def usuario_signup_view(request):
         return HttpResponseRedirect('usuariologin')
     return render(request,'usuario/usuariosignup.html',context=mydict)
 
+
 def is_usuario(user):
     return user.groups.filter(name='USUARIO').exists()
+
 
 @login_required(login_url='usuariologin')
 @user_passes_test(is_usuario)
@@ -47,11 +46,13 @@ def usuario_dashboard_view(request):
     }
     return render(request,'usuario/usuario_dashboard.html',context=dict)
 
+
 @login_required(login_url='usuariologin')
 @user_passes_test(is_usuario)
 def usuario_cuestionario_view(request):
     cuestionarios=QMODEL.Cuestionario.objects.all()
     return render(request,'usuario/usuario_cuestionario.html',{'cuestionarios':cuestionarios})
+
 
 @login_required(login_url='usuariologin')
 @user_passes_test(is_usuario)
@@ -62,8 +63,8 @@ def take_cuestionario_view(request,pk):
     puntaje_maximo=0
     for q in preguntas:
         puntaje_maximo=puntaje_maximo + q.puntaje
-    
     return render(request,'usuario/take_cuestionario.html',{'cuestionario':cuestionario,'numero_preguntas':numero_preguntas,'puntaje_maximo':puntaje_maximo})
+
 
 @login_required(login_url='usuariologin')
 @user_passes_test(is_usuario)
@@ -102,7 +103,6 @@ def calculate_puntajes_view(request):
         return HttpResponseRedirect('view-resultado')
 
 
-
 @login_required(login_url='usuariologin')
 @user_passes_test(is_usuario)
 def view_resultado_view(request):
@@ -118,16 +118,19 @@ def check_puntajes_view(request,pk):
     resultados= QMODEL.Resultados.objects.all().filter(cues=cuestionario).filter(usuario=usuario)
     return render(request,'usuario/check_puntajes.html',{'resultados':resultados})
 
+
 @login_required(login_url='usuariologin')
 @user_passes_test(is_usuario)
 def usuario_puntajes_view(request):
     cuestionarios=QMODEL.Cuestionario.objects.all()
     return render(request,'usuario/usuario_puntajes.html',{'cuestionarios':cuestionarios})
     
+
 @login_required(login_url='login')
 def usuario_ranking_view(request):
     cuestionarios = QMODEL.Cuestionario.objects.all()
     return render(request, 'usuario/ranking.html', {'cuestionarios': cuestionarios})
+
 
 @login_required(login_url='login')
 def usuario_ranking_detalle_view(request, cuestionario_id):

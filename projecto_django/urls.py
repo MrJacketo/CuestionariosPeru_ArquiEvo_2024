@@ -2,19 +2,15 @@ from django.urls import path,include
 from django.contrib import admin
 from cuestionario import views
 from django.contrib.auth.views import LogoutView,LoginView
+
 urlpatterns = [
    
     path('admin/', admin.site.urls),
     path('usuario/',include('usuario.urls')),
     
-
-
     path('',views.home_view,name=''),
     path('logout', LogoutView.as_view(template_name='componentes/logout.html'),name='logout'),
-    path('contactus', views.contactus_view),
     path('afterlogin', views.afterlogin_view,name='afterlogin'),
-
-
 
     path('adminclick', views.adminclick_view),
     path('adminlogin', LoginView.as_view(template_name='cuestionario/adminlogin.html'),name='adminlogin'),
@@ -41,5 +37,4 @@ urlpatterns = [
 
     path('cuestionarios-ranking/', views.cuestionarios_ranking_view, name='cuestionarios-ranking'),
     path('ranking/<int:cuestionario_id>/', views.ranking_view, name='ranking'),
-
 ]

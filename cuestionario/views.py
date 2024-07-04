@@ -1,13 +1,8 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 from . import forms, models
 from django.db.models import Max
-from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.conf import settings
-from datetime import date, timedelta
-from django.db.models import Q
-from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 from usuario import models as SMODEL
 from usuario import forms as SFORM
 from django.contrib.auth.models import User
@@ -180,6 +175,7 @@ def admin_check_puntajes_view(request, pk):
     resultados = models.Resultados.objects.all().filter(cues=cuestionario).filter(usuario=usuario)
     return render(request, 'cuestionario/admin_check_puntajes.html', {'resultados': resultados})
 
+
 @login_required(login_url='adminlogin')
 def ranking_view(request, cuestionario_id):
     cuestionario = models.Cuestionario.objects.get(id=cuestionario_id)
@@ -190,24 +186,8 @@ def ranking_view(request, cuestionario_id):
     ).order_by('-max_puntaje')
     return render(request, 'cuestionario/ranking.html', {'rankings': rankings, 'cuestionario': cuestionario})
 
+
 @login_required(login_url='adminlogin')
 def cuestionarios_ranking_view(request):
     cuestionarios = models.Cuestionario.objects.all()
     return render(request, 'cuestionario/cuestionarios_ranking.html', {'cuestionarios': cuestionarios})
-
-
-def aboutus_view(request):
-    return render(request, 'cuestionario/aboutus.html')
-
-
-def contactus_view(request):
-    sub = forms.ContactusForm()
-    if request.method == 'POST':
-        sub = forms.ContactusForm(request.POST)
-        if sub.is_valid():
-            email = sub.cleaned_data['Email']
-            name = sub.cleaned_data['Name']
-            message = sub.cleaned_data['Message']
-            send_mail(str(name) + ' || ' + str(email), message, settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently=False)
-            return render(request, 'cuestionario/contactussuccess.html')
-    return render(request, 'cuestionario/contactus.html', {'form': sub})
